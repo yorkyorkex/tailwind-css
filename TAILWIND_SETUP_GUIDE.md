@@ -3,6 +3,7 @@
 這是一個詳細的指南，教你如何在新的 React + Vite 專案中正確安裝和配置 Tailwind CSS。
 
 ## 目錄
+
 - [快速開始](#快速開始)
 - [詳細步驟](#詳細步驟)
 - [配置文件](#配置文件)
@@ -13,6 +14,7 @@
 ## 快速開始
 
 ### 一鍵命令（推薦）
+
 ```bash
 # 建立新專案
 npm create vite@latest my-tailwind-project -- --template react
@@ -44,6 +46,7 @@ npm install --save-dev @tailwindcss/vite @tailwindcss/postcss tailwindcss autopr
 ```
 
 **優點：**
+
 - 更簡潔的配置
 - 更好的性能
 - 更多的新功能
@@ -58,6 +61,7 @@ npx tailwindcss init -p
 ```
 
 **優點：**
+
 - 更穩定
 - 社群支援更完整
 - 文檔更豐富
@@ -67,6 +71,7 @@ npx tailwindcss init -p
 #### Tailwind CSS v4 配置
 
 1. **創建或修改 `postcss.config.js`**
+
 ```javascript
 export default {
   plugins: {
@@ -77,6 +82,7 @@ export default {
 ```
 
 2. **修改 `vite.config.js`**
+
 ```javascript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -90,13 +96,11 @@ export default defineConfig({
 #### Tailwind CSS v3 配置
 
 1. **`tailwind.config.js`**（通過 `npx tailwindcss init -p` 自動生成）
+
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
@@ -105,6 +109,7 @@ export default {
 ```
 
 2. **`postcss.config.js`**（通過 `npx tailwindcss init -p` 自動生成）
+
 ```javascript
 export default {
   plugins: {
@@ -119,13 +124,15 @@ export default {
 #### 對於 Tailwind CSS v4
 
 在 `src/index.css` 中**替換**所有內容為：
+
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 #### 對於 Tailwind CSS v3
 
 在 `src/index.css` 中**替換**所有內容為：
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -135,6 +142,7 @@ export default {
 ### 步驟 5：確認 CSS 文件導入
 
 確認 `src/main.jsx` 有導入 CSS 文件：
+
 ```javascript
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -144,7 +152,7 @@ import './index.css' // 確認這行存在
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
 ```
 
@@ -170,14 +178,14 @@ function App() {
             測試按鈕
           </button>
         </div>
-        
+
         {/* 其他測試元素 */}
         <div className="mt-6 grid grid-cols-3 gap-4">
           <div className="h-12 bg-red-400 rounded"></div>
           <div className="h-12 bg-green-400 rounded"></div>
           <div className="h-12 bg-yellow-400 rounded"></div>
         </div>
-        
+
         <div className="mt-4 text-sm text-gray-500 text-center">
           <p>響應式測試：</p>
           <p className="sm:text-base md:text-lg lg:text-xl">
@@ -205,11 +213,13 @@ npm run dev
 ### 問題 1：`autoprefixer` 模組找不到
 
 **錯誤訊息：**
+
 ```
 Error: Loading PostCSS Plugin failed: Cannot find module 'autoprefixer'
 ```
 
 **解決方案：**
+
 ```bash
 npm install --save-dev autoprefixer
 ```
@@ -217,17 +227,20 @@ npm install --save-dev autoprefixer
 ### 問題 2：PostCSS 配置重複或衝突
 
 **錯誤訊息：**
+
 ```
 [plugin:vite:css] Failed to load PostCSS config
 ```
 
 **解決方案：**
+
 - **v4**: 在 `postcss.config.js` 中只使用 `@tailwindcss/postcss`，不要同時使用 `tailwindcss`
 - **v3**: 在 `postcss.config.js` 中只使用 `tailwindcss`，不要使用 `@tailwindcss/postcss`
 
 ### 問題 3：樣式沒有生效
 
 **檢查清單：**
+
 1. ✅ 確認 CSS 文件有正確的 `@import` 或 `@tailwind` 指令
 2. ✅ 確認 `main.jsx` 有導入 CSS 文件 (`import './index.css'`)
 3. ✅ 確認 Vite 配置有包含 Tailwind 插件
@@ -237,6 +250,7 @@ npm install --save-dev autoprefixer
 ### 問題 4：Vite 配置錯誤
 
 **對於 v4，確認 `vite.config.js` 包含：**
+
 ```javascript
 import tailwindcss from '@tailwindcss/vite'
 
@@ -255,14 +269,14 @@ export default defineConfig({
 
 ### Tailwind CSS v4 vs v3
 
-| 特點 | v4 | v3 |
-|------|----|----|
-| 配置複雜度 | 簡單 | 較複雜 |
-| 性能 | 更好 | 良好 |
-| CSS 導入 | `@import "tailwindcss"` | `@tailwind base; @tailwind components; @tailwind utilities;` |
-| 配置檔案 | 不需要 `tailwind.config.js` | 需要 `tailwind.config.js` |
-| 穩定性 | 較新，可能有 bug | 穩定 |
-| 社群支援 | 較少 | 豐富 |
+| 特點       | v4                          | v3                                                           |
+| ---------- | --------------------------- | ------------------------------------------------------------ |
+| 配置複雜度 | 簡單                        | 較複雜                                                       |
+| 性能       | 更好                        | 良好                                                         |
+| CSS 導入   | `@import "tailwindcss"`     | `@tailwind base; @tailwind components; @tailwind utilities;` |
+| 配置檔案   | 不需要 `tailwind.config.js` | 需要 `tailwind.config.js`                                    |
+| 穩定性     | 較新，可能有 bug            | 穩定                                                         |
+| 社群支援   | 較少                        | 豐富                                                         |
 
 ### 建議選擇
 
@@ -275,9 +289,11 @@ export default defineConfig({
 ### 自定義顏色和字體
 
 #### v4 方式
+
 在 `src/index.css` 中：
+
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: #3b82f6;
@@ -287,10 +303,12 @@ export default defineConfig({
 ```
 
 #### v3 方式
+
 在 `tailwind.config.js` 中：
+
 ```javascript
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -327,5 +345,5 @@ export default {
 
 ---
 
-**最後更新：** 2025年9月27日  
+**最後更新：** 2025 年 9 月 27 日  
 **測試環境：** Node.js 18+, Vite 7.x, React 19.x
